@@ -5,7 +5,7 @@ pipeline {
         stage('code checkout') {
             steps {
                 // Get some code from a GitHub repository
-                git 'https://github.com/Renukadema/Calculator.git'
+                git 'https://github.com/fayazdev/shopping-cart.git'
             }
         }
         stage('Maven Build') {
@@ -18,7 +18,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv(installationName: 'SonarQube', credentialsId: 'sonar-token') {
-                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=Calculator -Dsonar.projectName='Calculator'"
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=shopping-cart -Dsonar.projectName='shopping-cart'"
                 }    
             } 
         }
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 //sh "sudo docker build -t calculator . --file dockerfile"
                 sh '''#!/bin/bash
-                docker build -t calculator . --file Dockerfile
+                docker build -t shopping-cart . --file Dockerfile
                 '''
             }
         }
